@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
-import "../App.css";
+import { useNavigate } from "react-router-dom";
 
-function Login() {
+function Register() {
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
   const navigate = useNavigate();
@@ -15,23 +13,21 @@ function Login() {
     setPass(e.target.value);
   }
 
-  async function handleLogin() {
+  async function handleSubmit() {
     try {
-      const loginData = { user: user, password: pass };
-      const response = await fetch("http://localhost:8080/api/auth/login", {
+      const regiestrationData = { user: user, password: pass };
+      const response = await fetch("http://localhost:8080/api/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(loginData),
+        body: JSON.stringify(regiestrationData),
       });
       const data = await response.json();
 
       if (response.status === 201) {
-        console.log("logged in", data);
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("username", user);
-        navigate("/");
+        console.log("registered", data);
+        navigate("/login");
       }
     } catch (error) {
       console.log("error", error);
@@ -40,8 +36,8 @@ function Login() {
 
   return (
     <>
-      <h1>Login</h1>
-
+      <div>Registration Page</div>
+      <span>create new user by inputting username and password</span>
       <input
         type="text"
         placeholder="username"
@@ -56,15 +52,12 @@ function Login() {
         value={pass}
         onChange={handlePass}
       />
-      <Link to="/register">
-        <button className="btn btn-primary">Register</button>
-      </Link>
 
-      <button className="btn btn-primary" onClick={handleLogin}>
-        Login
+      <button className="btn btn-active btn-primary" onClick={handleSubmit}>
+        Submit
       </button>
     </>
   );
 }
 
-export default Login;
+export default Register;

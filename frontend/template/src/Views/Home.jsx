@@ -5,7 +5,7 @@ function Home() {
   const [person, setPerson] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8080/movies")
+    fetch("http://localhost:8080/users")
       .then((res) => res.json())
       .then((data) => setPerson(data))
       .catch((err) => console.error("Backend not ready:", err));
@@ -15,7 +15,7 @@ function Home() {
     <>
       {person.map((data) => (
         <>
-          <div key={data.id}>{data.name} </div>
+          <div key={data.id}>{data.username} </div>
         </>
       ))}
     </>

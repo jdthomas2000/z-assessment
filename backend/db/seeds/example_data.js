@@ -3,13 +3,11 @@
  * @returns { Promise<void> }
  */
 exports.seed = async function (knex) {
-  await knex("favs").del();
-  await knex("favs").insert([
+  await knex("users").del();
+  await knex("users").insert([
     {
-      name: "F1 Movie",
-    },
-    {
-      name: "The Running Man",
+      username: "inventory_manager",
+      password: "test123",
     },
   ]);
 };

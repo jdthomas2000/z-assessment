@@ -1,25 +1,5 @@
-If postgres container is already setup in docker then eveyrting should work fine.
+1. Run <docker compose up --build> in the terminal
 
-If not, create a new postgres datatable using
+2. Navigate to (http://localhost:5173/) to view the frontend
 
-docker run --name pg-docker \
--e POSTGRES_PASSWORD=docker \
--d \
--p 5432:5432 \
--v $HOME/docker/volumes/postgres:/var/lib/postgresql \
-postgres
-
-docker ps -a
-
-docker exec -it <PSQL-Container-ID> bash
-
-Psql - U postgres
-
-CREATE DATABASE database_name;
-
-.env file
-
-DB_USER=your_user
-DB_PASSWORD=your_password
-
-on initial download npm i in root directory, backend directory, and frontend/template directory
+3. Backend hosted at (http://localhost:8080)

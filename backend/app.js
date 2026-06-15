@@ -4,10 +4,14 @@ const cors = require("cors");
 const app = express();
 
 const port = 8080;
-const knex = require("knex")(require("../db/knexfile.js")["development"]);
+const knex = require("./config/db");
 
 app.use(cors());
 app.use(express.json());
+
+const authRoutes = require("./routes/auth.js");
+
+app.use("/api/auth", authRoutes);
 
 app.get("/", (req, res) =>
   res.send("API reached! Please visit the /movies endpoint for data."),

@@ -3,9 +3,10 @@
  * @returns { Promise<void> }
  */
 exports.up = function (knex) {
-  return knex.schema.createTable("favs", (table) => {
+  return knex.schema.createTable("users", (table) => {
     table.increments("id");
-    table.string("name").notNullable();
+    table.string("username").notNullable();
+    table.string("password");
 
     table.timestamps(true, true);
   });

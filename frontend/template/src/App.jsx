@@ -1,28 +1,16 @@
 import { useState, useEffect } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import Login from "./Views/Login";
+import Home from "./Views/Home";
 
 function App() {
-  const [person, setPerson] = useState([]);
-
-  useEffect(() => {
-    fetch("http://localhost:8080/movies")
-      .then((res) => res.json())
-      .then((data) => setPerson(data))
-      .catch((err) => console.error("Backend not ready:", err));
-  }, []);
-  if (!person) return <h1>loading...</h1>;
   return (
     <>
-      {person.map((data) => (
-        <>
-          <div key={data.id}>
-            {data.name} {data.status}
-          </div>
-          <div>test</div>
-        </>
-      ))}
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Home />} />
+      </Routes>
     </>
   );
 }

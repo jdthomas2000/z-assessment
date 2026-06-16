@@ -6,14 +6,17 @@ import Home from "./Views/Home";
 import Register from "./Components/Register";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import Inventory from "./Components/PersonalInventory";
+import NavBar from "./Components/NavBar";
+import AllInventory from "./Components/AllInventory";
 
 function App() {
   return (
     <>
+      <NavBar></NavBar>
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<AllInventory />} />
         <Route
           path="/inventory/:user"
           element={

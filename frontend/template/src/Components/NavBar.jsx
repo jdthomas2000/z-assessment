@@ -1,11 +1,4 @@
-import { useState, useEffect } from "react";
-import "./App.css";
-import { Routes, Route } from "react-router-dom";
-import Login from "./Views/Login";
-import Home from "./Views/Home";
-import Register from "./Components/Register";
-import ProtectedRoute from "./Components/ProtectedRoute";
-import Inventory from "./Components/Inventory";
+import Inventory from "./PersonalInventory";
 import { useNavigate } from "react-router-dom";
 
 function NavBar() {
@@ -42,24 +35,29 @@ function NavBar() {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
           >
             <li>
-              <a>All Items</a>
+              <a onClick={() => navigate(`/`)}>All Items</a>
             </li>
             <li>
-              <a onClick={navigate(`/inventory/${localUsername}`)}>
+              <a onClick={() => navigate(`/inventory/${localUsername}`)}>
                 Personal Items
               </a>
             </li>
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl"> Book Inventory</a>
+        <a className="btn btn-ghost text-xl" onClick={() => navigate(`/`)}>
+          {" "}
+          Book Inventory
+        </a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <a>Item 1</a>
+            <a onClick={() => navigate(`/`)}>All Items</a>
           </li>
           <li>
-            <a>Item 3</a>
+            <a onClick={() => navigate(`/inventory/${localUsername}`)}>
+              Personal Items
+            </a>
           </li>
         </ul>
       </div>

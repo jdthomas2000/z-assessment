@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 function Register() {
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
+  const [first, setFirst] = useState("");
+  const [last, setLast] = useState("");
   const navigate = useNavigate();
 
   function handleUser(e) {
@@ -12,10 +14,21 @@ function Register() {
   function handlePass(e) {
     setPass(e.target.value);
   }
+  function handleFirst(e) {
+    setFirst(e.target.value);
+  }
+  function handleLast(e) {
+    setLast(e.target.value);
+  }
 
   async function handleSubmit() {
     try {
-      const regiestrationData = { user: user, password: pass };
+      const regiestrationData = {
+        fisrt: first,
+        last: last,
+        user: user,
+        password: pass,
+      };
       const response = await fetch("http://localhost:8080/api/auth/register", {
         method: "POST",
         headers: {
@@ -37,7 +50,24 @@ function Register() {
   return (
     <>
       <div>Registration Page</div>
-      <span>create new user by inputting username and password</span>
+      <span>
+        create new user by inputting first name, last name, username, and
+        password
+      </span>
+      <input
+        type="text"
+        placeholder="first name"
+        className="input input-neutral"
+        value={first}
+        onChange={handleFirst}
+      />
+      <input
+        type="text"
+        placeholder="last name"
+        className="input input-primary"
+        value={last}
+        onChange={handleLast}
+      />
       <input
         type="text"
         placeholder="username"

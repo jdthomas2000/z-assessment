@@ -17,8 +17,8 @@ function HoverCard({ itemName, description, quantity }) {
               </div>
             </div>
             <div>
-              <div className="text-xs opacity-20">QUANTITY</div>
-              <div>{quantity}</div>
+              <div className="text-xs opacity-20 text-right">QUANTITY</div>
+              <div className="text-right">{quantity}</div>
             </div>
           </div>
         </div>

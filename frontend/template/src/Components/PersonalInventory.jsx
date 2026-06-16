@@ -29,11 +29,12 @@ function Inventory() {
   }, [userObj]);
 
   if (!userObj || userObj.length === 0) return <h1>Loading...</h1>;
-  if (!userInventory)
+  if (!userInventory || userInventory.length === 0)
     return <h1>No user inventory for current user {userObj.username}</h1>;
 
   return (
     <>
+      <h1>Personal Inventory</h1>
       <div>
         {userInventory.map((item) => (
           <HoverCard

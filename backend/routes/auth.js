@@ -55,12 +55,15 @@ router.post("/login", async (req, res) => {
 
 function authenticate(req, res, next) {
   const authHeader = req.headers["authorization"];
+
+  if (!authHeader) return res.status(401).json({ message: "Access denied" });
   const token = authHeader.split(" ")[1];
 
   if (!token) {
     return res.status(401).json({ message: "no token" });
   }
-  jwt.verify(token, JWT_SECRET, (err, decodedUser) => {
+
+  jwt.verify(token, "JWT_SECRET", (err, decodedUser) => {
     if (err) {
       return res.status(401).json({ message: "invalid token" });
     }

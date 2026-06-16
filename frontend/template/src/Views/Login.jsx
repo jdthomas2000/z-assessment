@@ -31,7 +31,7 @@ function Login() {
         console.log("logged in", data);
         localStorage.setItem("token", data.token);
         localStorage.setItem("username", user);
-        navigate("/");
+        navigate(`/inventory/${user}`);
       }
     } catch (error) {
       console.log("error", error);

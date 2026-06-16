@@ -5,6 +5,8 @@
 exports.up = function (knex) {
   return knex.schema.createTable("users", (table) => {
     table.increments("id");
+    table.string("first");
+    table.string("last ");
     table.string("username").notNullable();
     table.string("password");
 
@@ -13,5 +15,5 @@ exports.up = function (knex) {
 };
 
 exports.down = function (knex) {
-  return knex.schema.dropTableIfExists("favs");
+  return knex.schema.dropTableIfExists("users");
 };

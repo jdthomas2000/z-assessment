@@ -28,7 +28,7 @@ app.get("/users", function (req, res) {
 app.get("/users/:user", function (req, res) {
   knex("users")
     .select("*")
-    .where("name", "=", req.params.user)
+    .where("username", "=", req.params.user)
     .then((data) => res.status(200).json(data))
     .catch((err) =>
       res.status(404).json({
@@ -59,9 +59,34 @@ app.delete("/users/:user", async (req, res) => {
   }
 });
 
+app.get("/inventory/", function (req, res) {
+  knex("inventory")
+    .select("*")
+    .then((data) => res.status(200).json(data))
+    .catch((err) =>
+      res.status(404).json({
+        message:
+          "The data you are looking for could not be found. Please try again",
+      }),
+    );
+});
+
 app.use(authToken);
 
 //put protected routes here
+
+app.get("/inventory/:id", function (req, res) {
+  knex("inventory")
+    .select("*")
+    .where("userID", "=", req.params.id)
+    .then((data) => res.status(200).json(data))
+    .catch((err) =>
+      res.status(404).json({
+        message:
+          "The data you are looking for could not be found. Please try again",
+      }),
+    );
+});
 
 app.listen(port, () =>
   console.log(`Example app listening at http://localhost:${port}`),

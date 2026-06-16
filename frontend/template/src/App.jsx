@@ -5,6 +5,7 @@ import Login from "./Views/Login";
 import Home from "./Views/Home";
 import Register from "./Components/Register";
 import ProtectedRoute from "./Components/ProtectedRoute";
+import Inventory from "./Components/PersonalInventory";
 
 function App() {
   return (
@@ -12,11 +13,12 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/" element={<Home />} />
         <Route
-          path="/"
+          path="/inventory/:user"
           element={
             <ProtectedRoute>
-              <Home />
+              <Inventory />
             </ProtectedRoute>
           }
         />

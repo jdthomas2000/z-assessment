@@ -72,6 +72,7 @@ function Register() {
               className="input input-neutral"
               value={user}
               onChange={handleUser}
+              autoComplete="off"
             />
             <input
               type="password"
@@ -79,6 +80,7 @@ function Register() {
               className="input input-neutral"
               value={pass}
               onChange={handlePass}
+              autoComplete="new-password"
             />
 
             <button

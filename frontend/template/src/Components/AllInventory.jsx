@@ -15,7 +15,7 @@ function AllInventory() {
 
   return (
     <>
-      <h1>Inventory - All Items</h1>
+      <h1 className="text-2xl font-bold">Inventory - All Items</h1>
       <div>
         {inventory.map((item) => (
           <HoverCard

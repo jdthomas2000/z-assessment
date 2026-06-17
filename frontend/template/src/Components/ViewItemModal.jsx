@@ -93,7 +93,15 @@ function ViewItemModal({ onClose, onRefresh, item }) {
   }, []);
   return (
     <>
-      <dialog id="my_modal_1" className="modal" ref={dialog}>
+      <dialog
+        id="my_modal_1"
+        className="modal"
+        ref={dialog}
+        onCancel={(e) => {
+          e.preventDefault();
+          onClose();
+        }}
+      >
         <div className="modal-box">
           <h3 className="font-bold text-lg">View/Edit/Delete Item!</h3>
           <div className="my-6 mx-2">

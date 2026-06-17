@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-function AddItemModal({ userID, onRefresh }) {
+function AddItemModal({ onClose, userID, onRefresh }) {
   const [itemName, setItemName] = useState("");
   const [description, setDescription] = useState("");
   const [quantity, setQuantity] = useState("");
@@ -41,6 +41,7 @@ function AddItemModal({ userID, onRefresh }) {
       if (response.status === 201) {
         console.log("registered", data);
         onRefresh();
+        onClose();
         setItemName("");
         setDescription("");
         setQuantity("");
@@ -58,15 +59,9 @@ function AddItemModal({ userID, onRefresh }) {
 
   return (
     <>
-      <button
-        className="btn"
-        onClick={() => document.getElementById("my_modal_1").showModal()}
-      >
-        Add Item
-      </button>
       <dialog id="my_modal_1" className="modal" ref={dialog}>
         <div className="modal-box">
-          <h3 className="font-bold text-lg">View/Edit/Delete Item!</h3>
+          <h3 className="font-bold text-lg">Add Item!</h3>
           <div className="my-6 mx-2">
             <div className="card w-96 bg-black text-white bg-[radial-gradient(circle_at_bottom_left,#ffffff04_35%,transparent_36%),radial-gradient(circle_at_top_right,#ffffff04_35%,transparent_36%)] bg-size-[4.95em_4.95em]">
               <div className="card-body">
@@ -128,6 +123,9 @@ function AddItemModal({ userID, onRefresh }) {
             <form method="dialog">
               <button className="btn" onClick={handleSubmit}>
                 Add
+              </button>
+              <button className="btn" onClick={onClose}>
+                Cancel
               </button>
             </form>
           </div>

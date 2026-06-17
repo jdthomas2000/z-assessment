@@ -7,6 +7,7 @@ function Inventory() {
   const [userObj, setUserObj] = useState(null);
   const [userInventory, setUserInventory] = useState([]);
   const [itemData, setItemData] = useState(null);
+  const [addModal, setAddModal] = useState(false);
 
   const localUsername = localStorage.getItem("username");
 
@@ -35,29 +36,55 @@ function Inventory() {
     fetchInventory();
   }, [userObj]);
 
-  function openModal(item) {
+  function openEditModal(item) {
     setItemData(item);
   }
 
-  function closeModal() {
+  function closeEditModal() {
     setItemData(null);
+  }
+
+  function openAddModal() {
+    setAddModal(true);
+  }
+
+  function closeAddModal() {
+    setAddModal(false);
   }
 
   if (!userObj || userObj.length === 0) return <h1>Loading...</h1>;
   if (!userInventory || userInventory.length === 0)
     return (
       <>
-        <h1>No user inventory for current user </h1>
-        <AddItemModal
-          userID={userObj[0].id}
-          onRefresh={fetchInventory}
-        ></AddItemModal>
+        <h1 className="text-2xl font-bold">
+          No user inventory for current user{" "}
+        </h1>
+        {addModal && (
+          <AddItemModal
+            userID={userObj[0].id}
+            onRefresh={fetchInventory}
+            onClose={closeAddModal}
+          ></AddItemModal>
+        )}
       </>
     );
 
   return (
     <>
-      <h1>Personal Inventory</h1>
+      <div className="flex items-center justify-between mr-80 mt-4">
+        <h1 className="text-2xl font-bold">Personal Inventory</h1>
+        <button className="btn" onClick={() => openAddModal()}>
+          Add Item
+        </button>
+        {addModal && (
+          <AddItemModal
+            userID={userObj[0].id}
+            onRefresh={fetchInventory}
+            onClose={closeAddModal}
+          ></AddItemModal>
+        )}
+      </div>
+
       <div>
         {userInventory.map((item) => (
           <HoverCard
@@ -65,20 +92,15 @@ function Inventory() {
             itemName={item.itemName}
             description={item.description}
             quantity={item.quantity}
-            onClick={() => openModal(item)}
+            onClick={() => openEditModal(item)}
           ></HoverCard>
         ))}
       </div>
 
-      <AddItemModal
-        userID={userObj[0].id}
-        onRefresh={fetchInventory}
-      ></AddItemModal>
-
       {itemData && (
         <ViewItemModal
           item={itemData}
-          onClose={closeModal}
+          onClose={closeEditModal}
           onRefresh={fetchInventory}
         ></ViewItemModal>
       )}

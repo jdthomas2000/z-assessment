@@ -1,4 +1,3 @@
-import Inventory from "./PersonalInventory";
 import { useNavigate } from "react-router-dom";
 
 function NavBar() {

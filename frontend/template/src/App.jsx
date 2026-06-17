@@ -3,11 +3,11 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Login from "./Views/Login";
 import Home from "./Views/Home";
-import Register from "./Components/Register";
+import Register from "./Views/Register";
 import ProtectedRoute from "./Components/ProtectedRoute";
-import Inventory from "./Components/PersonalInventory";
+import Inventory from "./Views/PersonalInventory";
 import NavBar from "./Components/NavBar";
-import AllInventory from "./Components/AllInventory";
+import AllInventory from "./Views/AllInventory";
 
 function App() {
   return (

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import HoverCard from "./HoverCard";
-import AddItemModal from "./AddItemModal";
-import ViewItemModal from "./ViewEditItemModal";
+import HoverCard from "../Components/HoverCard";
+import AddItemModal from "../Components/AddItemModal";
+import ViewItemModal from "../Components/ViewEditItemModal";
 
 function Inventory() {
   const [userObj, setUserObj] = useState(null);

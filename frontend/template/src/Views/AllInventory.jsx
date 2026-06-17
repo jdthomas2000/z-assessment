@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import HoverCard from "./HoverCard";
-import OnlyViewItemModal from "./OnlyViewModal";
+import HoverCard from "../Components/HoverCard";
+import OnlyViewItemModal from "../Components/OnlyViewModal";
 
 function AllInventory() {
   const [inventory, setInventory] = useState([]);

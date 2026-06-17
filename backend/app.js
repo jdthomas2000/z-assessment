@@ -73,7 +73,26 @@ app.get("/inventory/", function (req, res) {
 
 app.use(authToken);
 
-//put protected routes here
+app.delete("/inventory/item/:id", async (req, res) => {
+  try {
+    await knex("inventory").where("id", "=", req.params.id).del();
+    return res.status(200).json({ Item_Deleted: req.params.id });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.patch("/inventory/item/:id", async (req, res) => {
+  const { id, ...updatedData } = req.body;
+  try {
+    await knex("inventory").where("id", "=", req.params.id).update(updatedData);
+
+    return res.status(200).json({ message: "item updated" });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send(err.message);
+  }
+});
 
 app.get("/inventory/:id", function (req, res) {
   knex("inventory")
@@ -81,11 +100,27 @@ app.get("/inventory/:id", function (req, res) {
     .where("userID", "=", req.params.id)
     .then((data) => res.status(200).json(data))
     .catch((err) =>
-      res.status(404).json({
-        message:
-          "The data you are looking for could not be found. Please try again",
+      res.status(500).json({
+        message: "Server Error",
       }),
     );
+});
+
+app.post("/inventory/:id", async function (req, res) {
+  const { itemName, description, quantity } = req.body;
+  try {
+    await knex("inventory").insert({
+      itemName: itemName,
+      description: description,
+      quantity: quantity,
+      userID: req.params.id,
+    });
+
+    return res.status(201).json({ message: "item added" });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send(err.message);
+  }
 });
 
 app.listen(port, () =>

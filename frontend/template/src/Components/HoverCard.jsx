@@ -1,6 +1,13 @@
-function HoverCard({ itemName, description, quantity }) {
+function HoverCard({ itemName, description, quantity, onClick }) {
   return (
-    <a href="#" className="hover-3d my-12 mx-2 cursor-pointer">
+    <a
+      href="#"
+      className="hover-3d my-12 mx-2 cursor-pointer"
+      onClick={(e) => {
+        e.preventDefault();
+        onClick();
+      }}
+    >
       <div className="card w-96 bg-black text-white bg-[radial-gradient(circle_at_bottom_left,#ffffff04_35%,transparent_36%),radial-gradient(circle_at_top_right,#ffffff04_35%,transparent_36%)] bg-size-[4.95em_4.95em]">
         <div className="card-body">
           <div className="flex justify-between mb-10">

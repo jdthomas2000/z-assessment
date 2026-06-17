@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
 import HoverCard from "./HoverCard";
+import AddItemModal from "./AddItemModal";
+import ViewItemModal from "./ViewItemModal";
 
 function Inventory() {
   const [userObj, setUserObj] = useState(null);
   const [userInventory, setUserInventory] = useState([]);
+  const [itemData, setItemData] = useState(null);
 
   const localUsername = localStorage.getItem("username");
 
@@ -14,7 +17,7 @@ function Inventory() {
       .catch((err) => console.error("error:", err));
   }, [localUsername]);
 
-  useEffect(() => {
+  function fetchInventory() {
     if (!userObj || userObj.length === 0) return;
     const token = localStorage.getItem("token");
 
@@ -26,11 +29,31 @@ function Inventory() {
       .then((res) => res.json())
       .then((data) => setUserInventory(data))
       .catch((err) => console.error("error:", err));
+  }
+
+  useEffect(() => {
+    fetchInventory();
   }, [userObj]);
+
+  function openModal(item) {
+    setItemData(item);
+  }
+
+  function closeModal() {
+    setItemData(null);
+  }
 
   if (!userObj || userObj.length === 0) return <h1>Loading...</h1>;
   if (!userInventory || userInventory.length === 0)
-    return <h1>No user inventory for current user {userObj.username}</h1>;
+    return (
+      <>
+        <h1>No user inventory for current user </h1>
+        <AddItemModal
+          userID={userObj[0].id}
+          onRefresh={fetchInventory}
+        ></AddItemModal>
+      </>
+    );
 
   return (
     <>
@@ -42,9 +65,23 @@ function Inventory() {
             itemName={item.itemName}
             description={item.description}
             quantity={item.quantity}
+            onClick={() => openModal(item)}
           ></HoverCard>
         ))}
       </div>
+
+      <AddItemModal
+        userID={userObj[0].id}
+        onRefresh={fetchInventory}
+      ></AddItemModal>
+
+      {itemData && (
+        <ViewItemModal
+          item={itemData}
+          onClose={closeModal}
+          onRefresh={fetchInventory}
+        ></ViewItemModal>
+      )}
     </>
   );
 }

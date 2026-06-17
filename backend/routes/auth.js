@@ -54,6 +54,8 @@ router.post("/login", async (req, res) => {
 });
 
 function authenticate(req, res, next) {
+  if (req.method === "OPTIONS") return next();
+
   const authHeader = req.headers["authorization"];
 
   if (!authHeader) return res.status(401).json({ message: "Access denied" });

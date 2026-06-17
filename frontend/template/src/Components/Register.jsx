@@ -24,7 +24,7 @@ function Register() {
   async function handleSubmit() {
     try {
       const regiestrationData = {
-        fisrt: first,
+        first: first,
         last: last,
         user: user,
         password: pass,

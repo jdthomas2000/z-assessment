@@ -7,7 +7,7 @@ const knex = require("../config/db");
 
 router.post("/register", async (req, res) => {
   try {
-    const { user, password } = req.body;
+    const { first, last, user, password } = req.body;
     if (!user || !password)
       return res.status(400).json({ message: "user and password required" });
 
@@ -18,6 +18,8 @@ router.post("/register", async (req, res) => {
     const hashPass = await bcrypt.hash(password, 10);
 
     await knex("users").insert({
+      first: first,
+      last: last,
       username: user,
       password: hashPass,
     });

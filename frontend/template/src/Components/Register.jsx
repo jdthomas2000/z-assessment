@@ -49,43 +49,47 @@ function Register() {
 
   return (
     <>
-      <div>Registration Page</div>
-      <span>
-        create new user by inputting first name, last name, username, and
-        password
-      </span>
-      <input
-        type="text"
-        placeholder="first name"
-        className="input input-neutral"
-        value={first}
-        onChange={handleFirst}
-      />
-      <input
-        type="text"
-        placeholder="last name"
-        className="input input-primary"
-        value={last}
-        onChange={handleLast}
-      />
-      <input
-        type="text"
-        placeholder="username"
-        className="input input-neutral"
-        value={user}
-        onChange={handleUser}
-      />
-      <input
-        type="password"
-        placeholder="password"
-        className="input input-primary"
-        value={pass}
-        onChange={handlePass}
-      />
+      <div className="min-h-screen w-full flex flex-col justify-start items-center bg-base-100 p-4 mt-40">
+        <div className="w-full max-w-sm">
+          <div className="flex flex-col gap-4 border border-gray-300 rounded-lg p-4 ">
+            <input
+              type="text"
+              placeholder="first name"
+              className="input input-neutral"
+              value={first}
+              onChange={handleFirst}
+            />
+            <input
+              type="text"
+              placeholder="last name"
+              className="input input-neutral"
+              value={last}
+              onChange={handleLast}
+            />
+            <input
+              type="text"
+              placeholder="username"
+              className="input input-neutral"
+              value={user}
+              onChange={handleUser}
+            />
+            <input
+              type="password"
+              placeholder="password"
+              className="input input-neutral"
+              value={pass}
+              onChange={handlePass}
+            />
 
-      <button className="btn btn-active btn-primary" onClick={handleSubmit}>
-        Submit
-      </button>
+            <button
+              className="btn btn-active btn-secondary"
+              onClick={handleSubmit}
+            >
+              Register
+            </button>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

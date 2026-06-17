@@ -163,13 +163,13 @@ function ViewItemModal({ onClose, onRefresh, item }) {
 
           <div className="modal-action">
             <form method="dialog">
-              <button className="btn" onClick={handleEdit}>
+              <button className="btn btn-secondary mr-2" onClick={handleEdit}>
                 Submit Edit
               </button>
-              <button className="btn" onClick={handleDelete}>
+              <button className="btn btn-primary mr-2" onClick={handleDelete}>
                 Delete
               </button>
-              <button className="btn" onClick={onClose}>
+              <button className="btn btn-neutral" onClick={onClose}>
                 Cancel
               </button>
             </form>

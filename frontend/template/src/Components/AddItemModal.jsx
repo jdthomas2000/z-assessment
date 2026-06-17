@@ -121,10 +121,10 @@ function AddItemModal({ onClose, userID, onRefresh }) {
 
           <div className="modal-action">
             <form method="dialog">
-              <button className="btn" onClick={handleSubmit}>
+              <button className="btn btn-secondary mr-2" onClick={handleSubmit}>
                 Add
               </button>
-              <button className="btn" onClick={onClose}>
+              <button className="btn btn-primary" onClick={onClose}>
                 Cancel
               </button>
             </form>

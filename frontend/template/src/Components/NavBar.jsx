@@ -62,8 +62,8 @@ function NavBar() {
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn" onClick={handleLogout}>
-          Logout
+        <a className="btn btn-neutral" onClick={handleLogout}>
+          Login/Logout
         </a>
       </div>
     </div>

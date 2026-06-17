@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import HoverCard from "./HoverCard";
 import AddItemModal from "./AddItemModal";
-import ViewItemModal from "./ViewItemModal";
+import ViewItemModal from "./ViewEditItemModal";
 
 function Inventory() {
   const [userObj, setUserObj] = useState(null);
@@ -52,28 +52,40 @@ function Inventory() {
     setAddModal(false);
   }
 
+  if (!localStorage.getItem("username"))
+    return (
+      <h1 className="text-2xl font-bold">
+        Please log in to view personal items
+      </h1>
+    );
+
   if (!userObj || userObj.length === 0) return <h1>Loading...</h1>;
   if (!userInventory || userInventory.length === 0)
     return (
       <>
-        <h1 className="text-2xl font-bold">
-          No user inventory for current user{" "}
-        </h1>
-        {addModal && (
-          <AddItemModal
-            userID={userObj[0].id}
-            onRefresh={fetchInventory}
-            onClose={closeAddModal}
-          ></AddItemModal>
-        )}
+        <div className="flex items-center mt-4">
+          <h1 className="text-2xl font-bold">
+            No user inventory for current user{" "}
+          </h1>
+          <button className="btn ml-5" onClick={() => openAddModal()}>
+            Add Item
+          </button>
+          {addModal && (
+            <AddItemModal
+              userID={userObj[0].id}
+              onRefresh={fetchInventory}
+              onClose={closeAddModal}
+            ></AddItemModal>
+          )}
+        </div>
       </>
     );
 
   return (
     <>
-      <div className="flex items-center justify-between mr-80 mt-4">
+      <div className="flex items-center mt-4">
         <h1 className="text-2xl font-bold">Personal Inventory</h1>
-        <button className="btn" onClick={() => openAddModal()}>
+        <button className="btn btn-neutral ml-5" onClick={() => openAddModal()}>
           Add Item
         </button>
         {addModal && (
@@ -84,6 +96,13 @@ function Inventory() {
           ></AddItemModal>
         )}
       </div>
+
+      <span className="text-1xl font-bold mt-3">
+        {" "}
+        Welcome {userObj[0].username}! This page displays all of the items
+        created by you. Click on the card(s) to view/edit/delete each item.
+        Click the add button to add a new item.
+      </span>
 
       <div>
         {userInventory.map((item) => (

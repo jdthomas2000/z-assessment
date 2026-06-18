@@ -41,7 +41,9 @@ app.get("/users/:user", function (req, res) {
 app.patch("/users/:user", async (req, res) => {
   const { id, ...updateData } = req.body;
   try {
-    await knex("users").where("name", "=", req.params.user).update(updateData);
+    await knex("users")
+      .where("username", "=", req.params.user)
+      .update(updateData);
 
     return res.status(201).json({ user: req.params.user });
   } catch (err) {
@@ -52,7 +54,7 @@ app.patch("/users/:user", async (req, res) => {
 
 app.delete("/users/:user", async (req, res) => {
   try {
-    await knex("users").where("name", "=", req.params.user).del();
+    await knex("users").where("username", "=", req.params.user).del();
     return res.status(201).json({ User_deleted: req.params.user });
   } catch (err) {
     res.status(500).json({ error: err.message });

@@ -39,7 +39,7 @@ function AddItemModal({ onClose, userID, onRefresh }) {
       const data = await response.json();
 
       if (response.status === 201) {
-        console.log("registered", data);
+        console.log("added", data);
         onRefresh();
         onClose();
         setItemName("");

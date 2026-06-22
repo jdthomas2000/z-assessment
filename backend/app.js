@@ -9,9 +9,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/api/auth", authRouter);
 
-app.get("/", (req, res) =>
-  res.send("API reached! Please visit the /movies endpoint for data."),
-);
+app.get("/", (req, res) => res.send("API reached!"));
 
 app.get("/users", function (req, res) {
   knex("users")
@@ -126,5 +124,5 @@ app.post("/inventory/:id", async function (req, res) {
 });
 
 app.listen(port, () =>
-  console.log(`Example app listening at http://localhost:${port}`),
+  console.log(`App listening at http://localhost:${port}`),
 );

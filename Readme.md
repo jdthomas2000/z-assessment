@@ -53,7 +53,6 @@ DB_PASSWORD=docker
 
 - `http://localhost:5173/login`  
   Login page for existing users.
-  - Invalid credentials currently fail silently in the UI (errors only appear in the console).
   - Default seeded user:
     - username: **inventory_manager**
     - password: **test123**

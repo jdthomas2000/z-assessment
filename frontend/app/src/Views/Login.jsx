@@ -6,6 +6,7 @@ import "../App.css";
 function Login() {
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
+  const [toast, setToast] = useState("");
   const navigate = useNavigate();
 
   function handleUser(e) {
@@ -29,9 +30,13 @@ function Login() {
 
       if (response.status === 201) {
         console.log("logged in", data);
+
         localStorage.setItem("token", data.token);
         localStorage.setItem("username", user);
+        setToast("success");
         navigate(`/inventory/${user}`);
+      } else if (response.status === 400) {
+        setToast("error");
       }
     } catch (error) {
       console.log("error", error);
@@ -71,6 +76,21 @@ function Login() {
           </Link>
         </div>
       </div>
+
+      {toast === "success" && (
+        <div className="toast">
+          <div className="alert alert-success">
+            <span>{user} logged in.</span>
+          </div>
+        </div>
+      )}
+      {toast === "error" && (
+        <div className="toast">
+          <div className="alert alert-error">
+            <span>Log in failed.</span>
+          </div>
+        </div>
+      )}
     </>
   );
 }
